@@ -1,5 +1,5 @@
 #import <React/RCTBridgeModule.h>
 
-@interface PianoOauth : NSObject <RCTBridgeModule>
+@interface RNPianoOauth : NSObject <RCTBridgeModule>
 
 @end

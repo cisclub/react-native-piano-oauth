@@ -1,13 +1,12 @@
 #import "PianoOauth.h"
 
-@implementation PianoOauth
+@implementation RNPianoOauth
 
-RCT_EXPORT_MODULE()
+RCT_EXPORT_MODULE(PianoOauth)
 
-RCT_EXPORT_METHOD(sampleMethod:(NSString *)stringArgument numberParameter:(nonnull NSNumber *)numberArgument callback:(RCTResponseSenderBlock)callback)
+RCT_EXPORT_METHOD()
 {
-    // TODO: Implement some actually useful functionality
-    callback(@[[NSString stringWithFormat: @"numberArgument: %@ stringArgument: %@", numberArgument, stringArgument]]);
+    
 }
 
 @end

@@ -2,7 +2,7 @@
   "name": "react-native-piano-oauth",
   "title": "React Native Piano Oauth",
   "version": "1.0.1",
-  "description": "TODO",
+  "description": "PianoOAuth wrapper for React Native",
   "main": "index.js",
   "files": [
     "README.md",
@@ -16,15 +16,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/github_account/react-native-piano-oauth.git",
-    "baseUrl": "https://github.com/github_account/react-native-piano-oauth"
+    "url": "git+https://github.com/cisclub/react-native-piano-oauth.git",
+    "baseUrl": "https://github.com/cisclub/react-native-piano-oauth"
   },
   "keywords": [
     "react-native"
   ],
   "author": {
-    "name": "Your Name",
-    "email": "yourname@email.com"
+    "name": "cisclub",
+    "email": ""
   },
   "license": "MIT",
   "licenseFilename": "LICENSE",
