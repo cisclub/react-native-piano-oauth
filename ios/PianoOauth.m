@@ -12,7 +12,7 @@ static RCTResponseSenderBlock _didCancelSignInHandler;
 
 @implementation RNPianoOauth
 
-RCT_EXPORT_MODULE(PianoOauth)
+RCT_EXPORT_MODULE(PianoOAuth)
 
 RCT_EXPORT_METHOD(signInWithAID:(NSString *)AID
                   endpointURL:(NSString *)endpointURL
