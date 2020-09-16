@@ -10,8 +10,16 @@
 
 ## Usage
 ```javascript
-import PianoOauth from 'react-native-piano-oauth';
+import PianoOAuth from 'react-native-piano-oauth';
 
-// TODO: What to do with the module?
-PianoOauth;
+PianoOauth.signInWithAID(
+  '<AID>',
+  'https://sandbox.tinypass.com',
+  (token, error) => {
+    console.log(token, " ", error);
+  },
+  () => {
+    console.log("Login cancelled");
+  },
+);
 ```
