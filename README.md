@@ -12,7 +12,7 @@
 ```javascript
 import PianoOAuth from 'react-native-piano-oauth';
 
-PianoOauth.signInWithAID(
+PianoOAuth.signInWithAID(
   '<AID>',
   'https://sandbox.tinypass.com',
   (token, error) => {
