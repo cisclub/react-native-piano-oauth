@@ -15,6 +15,7 @@ import PianoOAuth from 'react-native-piano-oauth';
 PianoOAuth.signInWithAID(
   '<AID>',
   'https://sandbox.tinypass.com',
+  PianoOAuth.widgetType.register, // or .login
   (token, error) => {
     console.log(token, " ", error);
   },
