@@ -16,8 +16,8 @@ PianoOAuth.signInWithAID(
   '<AID>',
   'https://sandbox.tinypass.com',
   PianoOAuth.widgetType.register, // or .login
-  (token, error) => {
-    console.log(token, " ", error);
+  (token) => {
+    console.log(token);
   },
   () => {
     console.log("Login cancelled");
