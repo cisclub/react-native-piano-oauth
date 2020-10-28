@@ -39,3 +39,8 @@ const PianoOauth = {
 };
 
 export default PianoOauth;
+
+export const WidgetType = {
+  Login: 0,
+  Register: 1
+}
