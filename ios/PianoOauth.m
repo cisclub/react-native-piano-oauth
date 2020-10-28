@@ -16,7 +16,7 @@ RCT_EXPORT_MODULE(PianoOAuth)
 
 RCT_EXPORT_METHOD(signInWithAID:(NSString *)AID
                   endpointURL:(NSString *)endpointURL
-                  widgetType:(WidgetType)widgetType
+                  widgetType:(int)widgetType
                   didSignInForTokenWithError:(RCTResponseSenderBlock)didSignInHandler
                   didCancelSignIn:(RCTResponseSenderBlock)didCancelSignInHandler)
 
@@ -26,7 +26,7 @@ RCT_EXPORT_METHOD(signInWithAID:(NSString *)AID
     
     [PianoID.shared setAid:AID];
     [PianoID.shared setEndpointUrl:endpointURL];
-    [PianoID.shared setWidgetType:WidgetTypeRegister];
+    [PianoID.shared setWidgetType:widgetType];
     [PianoID.shared setSignUpEnabled:YES];
     [PianoID.shared setDelegate:self];
     

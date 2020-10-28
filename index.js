@@ -12,12 +12,14 @@ const PianoOauth = {
     signInWithAID(
         aid: String,
         endpointURL: String,
+        widgetType: Int,
         didSignInCallbackHandler = ({token, error}) => {},
         didCancelSignInCallbackHandler = () => {}) 
     {
         PianoOauthModule.signInWithAID(
             aid,
             endpointURL,
+            widgetType,
             didSignInCallbackHandler,
             didCancelSignInCallbackHandler);
     },
