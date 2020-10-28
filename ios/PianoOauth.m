@@ -46,11 +46,11 @@ RCT_EXPORT_METHOD(signOutWithToken:(NSString *)token
 }
 
 -(void)pianoID:(PianoID *)pianoID didSignOutWithError:(NSError *)error {
-    _didSignOutHandler(@[error]);
+    _didSignOutHandler(@[error? error : [NSNull null]]);
 }
 
 -(void)pianoID:(PianoID *)pianoID didSignInForToken:(PianoIDToken *)token withError:(NSError *)error {
-    _didSignInHandler(@[token, error]);
+    _didSignInHandler(@[token? token : [NSNull null], error? error : [NSNull null]]);
 }
 
 
