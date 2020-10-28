@@ -2,15 +2,15 @@
 
 @import PianoOAuth;
 
-static RCTResponseSenderBlock _didSignInHandler;
-static RCTResponseSenderBlock _didSignOutHandler;
-static RCTResponseSenderBlock _didCancelSignInHandler;
-
 @interface RNPianoOauth(PianoIDdelegate)<PianoIDDelegate>
 
 @end
 
 @implementation RNPianoOauth
+
+@synthesize didSignInHandler;
+@synthesize didCancelSignInHandler;
+@synthesize didSignOutHandler;
 
 RCT_EXPORT_MODULE(PianoOAuth)
 
@@ -21,14 +21,15 @@ RCT_EXPORT_METHOD(signInWithAID:(NSString *)AID
                   didCancelSignIn:(RCTResponseSenderBlock)didCancelSignInHandler)
 
 {
-    _didSignInHandler = didSignInHandler;
-    _didCancelSignInHandler = didCancelSignInHandler;
+    [self setDidSignInHandler:didSignInHandler];
+    [self setDidCancelSignInHandler:didCancelSignInHandler];
+    
+    [PianoID.shared setDelegate:self];
     
     [PianoID.shared setAid:AID];
     [PianoID.shared setEndpointUrl:endpointURL];
     [PianoID.shared setWidgetType:widgetType];
     [PianoID.shared setSignUpEnabled:YES];
-    [PianoID.shared setDelegate:self];
     
     [PianoID.shared signIn];
 }
@@ -36,21 +37,21 @@ RCT_EXPORT_METHOD(signInWithAID:(NSString *)AID
 RCT_EXPORT_METHOD(signOutWithToken:(NSString *)token
                   didSignOutHandler:(RCTResponseSenderBlock)didSignOutHandler)
 {
-    _didSignOutHandler = didSignOutHandler;
+    [self setDidSignOutHandler:didSignOutHandler];
     
     [PianoID.shared signOutWithToken:token];
 }
 
 -(void)pianoIDSignInDidCancel:(PianoID *)pianoID {
-    _didCancelSignInHandler(@[]);
+    self.didCancelSignInHandler(@[]);
 }
 
 -(void)pianoID:(PianoID *)pianoID didSignOutWithError:(NSError *)error {
-    _didSignOutHandler(@[error? error : [NSNull null]]);
+    self.didSignOutHandler(@[error? error : [NSNull null]]);
 }
 
 -(void)pianoID:(PianoID *)pianoID didSignInForToken:(PianoIDToken *)token withError:(NSError *)error {
-    _didSignInHandler(@[token? token : [NSNull null], error? error : [NSNull null]]);
+    self.didSignInHandler(@[token.accessToken]);
 }
 
 
