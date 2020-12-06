@@ -15,6 +15,7 @@
 RCT_EXPORT_MODULE(PianoOAuth)
 
 RCT_EXPORT_METHOD(signInWithAID:(NSString *)AID
+                  googleCID: (NSString *)GCID
                   endpointURL:(NSString *)endpointURL
                   widgetType:(int)widgetType
                   didSignInForTokenWithError:(RCTResponseSenderBlock)didSignInHandler
@@ -30,6 +31,7 @@ RCT_EXPORT_METHOD(signInWithAID:(NSString *)AID
     [PianoID.shared setEndpointUrl:endpointURL];
     [PianoID.shared setWidgetType:widgetType];
     [PianoID.shared setSignUpEnabled:YES];
+    [PianoID.shared setGoogleClientId:GCID];
     
     [PianoID.shared signIn];
 }
