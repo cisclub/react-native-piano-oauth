@@ -11,6 +11,7 @@ const PianoOauth = {
      */
     signInWithAID(
         aid: String,
+        googleCID: String,
         endpointURL: String,
         widgetType: Int,
         didSignInCallbackHandler = ({payload}) => {},
@@ -18,6 +19,7 @@ const PianoOauth = {
     {
         PianoOauthModule.signInWithAID(
             aid,
+            googleCID,
             endpointURL,
             widgetType,
             didSignInCallbackHandler,
