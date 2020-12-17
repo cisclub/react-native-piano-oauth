@@ -53,7 +53,13 @@ RCT_EXPORT_METHOD(signOutWithToken:(NSString *)token
 }
 
 -(void)pianoID:(PianoID *)pianoID didSignInForToken:(PianoIDToken *)token withError:(NSError *)error {
-    self.didSignInHandler(@[token.accessToken]);
+    if (token != nil) {
+        self.didSignInHandler(@[token.accessToken]);
+    } else if (error != nil) {
+        NSMutableDictionary *errorInfo = error.userInfo.mutableCopy;
+        [errorInfo setObject:error.domain forKey:@"domain"];
+        self.didSignInHandler(@[@{@"error": errorInfo}]);
+    }
 }
 
 
