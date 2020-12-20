@@ -1,7 +1,7 @@
 {
   "name": "react-native-piano-oauth",
   "title": "React Native Piano Oauth",
-  "version": "1.0.21",
+  "version": "1.0.22",
   "description": "PianoOAuth wrapper for React Native",
   "main": "index.js",
   "files": [
