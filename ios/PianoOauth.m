@@ -42,13 +42,14 @@ RCT_EXPORT_METHOD(signInWithAID:(NSString *)AID
 
 + (UIViewController*) topMostController
 {
-    UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
-
-    while (topController.presentedViewController) {
-        topController = topController.presentedViewController;
-    }
-
-    return topController;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
+        while (topController.presentedViewController) {
+            topController = topController.presentedViewController;
+        }
+        
+        return topController;
+    });
 }
 
 RCT_EXPORT_METHOD(signOutWithToken:(NSString *)token
