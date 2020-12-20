@@ -1,6 +1,7 @@
 #import "PianoOauth.h"
 
 @import PianoOAuth;
+@import UIKit;
 
 @interface RNPianoOauth(PianoIDdelegate)<PianoIDDelegate>
 
@@ -33,7 +34,21 @@ RCT_EXPORT_METHOD(signInWithAID:(NSString *)AID
     [PianoID.shared setSignUpEnabled:YES];
     [PianoID.shared setGoogleClientId:GCID];
     
+    UIViewController *topViewController = [RNPianoOauth topMostController];
+    [PianoID.shared setPresentingViewController:topViewController];
+    
     [PianoID.shared signIn];
+}
+
++ (UIViewController*) topMostController
+{
+    UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
+
+    while (topController.presentedViewController) {
+        topController = topController.presentedViewController;
+    }
+
+    return topController;
 }
 
 RCT_EXPORT_METHOD(signOutWithToken:(NSString *)token
