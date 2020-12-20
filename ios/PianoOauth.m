@@ -34,22 +34,22 @@ RCT_EXPORT_METHOD(signInWithAID:(NSString *)AID
     [PianoID.shared setSignUpEnabled:YES];
     [PianoID.shared setGoogleClientId:GCID];
     
-    UIViewController *topViewController = [RNPianoOauth topMostController];
-    [PianoID.shared setPresentingViewController:topViewController];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIViewController *topViewController = [RNPianoOauth topMostController];
+        [PianoID.shared setPresentingViewController:topViewController];
+    });
     
     [PianoID.shared signIn];
 }
 
 + (UIViewController*) topMostController
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
-        while (topController.presentedViewController) {
-            topController = topController.presentedViewController;
-        }
-        
-        return topController;
-    });
+    UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    while (topController.presentedViewController) {
+        topController = topController.presentedViewController;
+    }
+    
+    return topController;
 }
 
 RCT_EXPORT_METHOD(signOutWithToken:(NSString *)token
