@@ -4,23 +4,26 @@ const PianoOauthModule = NativeModules.PianoOAuth;
 
 const PianoOauth = {
     /*
-     * @param aid                               set this value to <PUBLISHER_AID>
+     * @param aid           set this value to <PUBLISHER_AID>
      * @param endpointURL
+     */
+    init(appID, GoogleCID) {
+        PianoOauthModule.initWithAID(appID, GoogleCID);
+    },
+    /*
+     * @param googleCID                         Google Sign-In ID
      * @param signInCallbackHandler             callback handler called after user sign in.
      * @param didCancelSignInCallbackHandler    callback handler called when user cancel sign in.
      */
-    signInWithAID(
-        aid: String,
+    signIn(
         googleCID: String,
-        endpointURL: String,
         widgetType: Int,
         didSignInCallbackHandler = ({payload}) => {},
         didCancelSignInCallbackHandler = () => {}) 
     {
-        PianoOauthModule.signInWithAID(
-            aid,
+        console.log(">>>>>WTF")
+        PianoOauthModule.signInWithGoogleCID(
             googleCID,
-            endpointURL,
             widgetType,
             didSignInCallbackHandler,
             didCancelSignInCallbackHandler);
