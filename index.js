@@ -21,7 +21,6 @@ const PianoOauth = {
         didSignInCallbackHandler = ({payload}) => {},
         didCancelSignInCallbackHandler = () => {}) 
     {
-        console.log(">>>>>WTF")
         PianoOauthModule.signInWithGoogleCID(
             googleCID,
             widgetType,
