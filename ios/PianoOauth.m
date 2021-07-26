@@ -43,6 +43,17 @@ RCT_EXPORT_METHOD(signInWithGoogleCID:(NSString *)GCID
     [PianoID.shared signIn];
 }
 
+RCT_EXPORT_METHOD(signOutWithToken:(NSString *)token
+                  didSignOutHandler:(RCTResponseSenderBlock)didSignOutHandler)
+{
+    [self setDidSignOutHandler:didSignOutHandler];
+    
+    [PianoID.shared signOutWithToken:token];
+}
+
+
+#pragma mark - Helper methods
+
 + (UIViewController*) topMostController
 {
     UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
@@ -53,30 +64,25 @@ RCT_EXPORT_METHOD(signInWithGoogleCID:(NSString *)GCID
     return topController;
 }
 
-RCT_EXPORT_METHOD(signOutWithToken:(NSString *)token
-                  didSignOutHandler:(RCTResponseSenderBlock)didSignOutHandler)
-{
-    [self setDidSignOutHandler:didSignOutHandler];
-    
-    [PianoID.shared signOutWithToken:token];
-}
 
--(void)pianoIDSignInDidCancel:(PianoID *)pianoID {
-    self.didCancelSignInHandler(@[]);
-}
+#pragma mark - PianoIDDelegate
 
--(void)pianoID:(PianoID *)pianoID didSignOutWithError:(NSError *)error {
-    self.didSignOutHandler(@[error? error : [NSNull null]]);
-}
-
--(void)pianoID:(PianoID *)pianoID didSignInForToken:(PianoIDToken *)token withError:(NSError *)error {
-    if (token != nil) {
-        self.didSignInHandler(@[token.accessToken]);
-    } else if (error != nil) {
+-(void)signInResult:(PianoIDSignInResult *)result withError:(NSError *)error {
+    if (error) { // Failed
         NSMutableDictionary *errorInfo = error.userInfo.mutableCopy;
         [errorInfo setObject:error.domain forKey:@"domain"];
         self.didSignInHandler(@[@{@"error": errorInfo}]);
+    } else if (result.token) { // Success
+        self.didSignInHandler(@[result.token.accessToken]);
     }
+}
+
+-(void)signOutWithError:(NSError *)error {
+    self.didSignOutHandler(@[error? error : [NSNull null]]);
+}
+
+-(void)cancel {
+    self.didCancelSignInHandler(@[]);
 }
 
 
